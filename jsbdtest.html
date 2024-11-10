@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    li{list-style-type: none;}
+</style>
+<body>
+    <center>Здесь всё практически всё сделано с помощью js</center>
+    <a href="index.php">Обратно</a>
+    <p>all product</p>    
+<div id="allfoods"></div>
+<form id="addProductForm">
+    <input type="text" id="namefood" placeholder="Название продукта" required>
+    <input type="text" id="tag" placeholder="Тег" required>
+    <input type="number" id="count" placeholder="Количество" required>
+    <button type="submit">Добавить продукт</button>
+</form>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+    function fetchfood(){
+        fetch('datafood.php')
+        .then(response=> {
+            if(!response.ok){
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayfoodbd(data)
+        })
+        .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+    
+    function displayfoodbd(data){
+        var prodlist =document.getElementById('allfoods');
+        prodlist.innerHTML='';
+        data.forEach(item => {
+    var li = document.createElement('li');
+    li.innerHTML = `<form>
+                Продукт:<span class="namefood" data-id="${item.id}"> ${item.namefood}</span><br>
+                Тег:<span class="tag" data-id="${item.id}"> ${item.tag}</span><br>
+                Кол-во:<span class="count" data-id="${item.id}"> ${item.count}</span><br>
+                <button class="editbutton" data-id="${item.id}">Изменить</button><br>
+                <button class="deleteButton" data-id="${item.id}">Удалить</button>
+            </form>`;
+    prodlist.appendChild(li);
+    });
+    document.querySelectorAll('.deleteButton').forEach(button => {
+        button.addEventListener('click', deleteProduct);
+    });
+    document.querySelectorAll('.editbutton').forEach(button => {
+        button.addEventListener('click',function(event){
+            event.preventDefault()
+            const productId = this.getAttribute('data-id');
+
+            const nameSpan = document.querySelector(`.namefood[data-id="${productId}"]`);
+            const tagSpan = document.querySelector(`.tag[data-id="${productId}"]`);
+            const countSpan = document.querySelector(`.count[data-id="${productId}"]`);
+
+            nameSpan.innerHTML = `<input type="text" value="${nameSpan.textContent.trim()}" id="nameInput-${productId}">`;
+            tagSpan.innerHTML = `<input type="text" value="${tagSpan.textContent.trim()}" id="tagInput-${productId}">`;
+            countSpan.innerHTML = `<input type="number" value="${countSpan.textContent.trim()}" id="countInput-${productId}">`;
+
+            this.textContent = 'Сохранить';
+            this.classList.remove('editbutton');
+            this.classList.add('savebutton');
+
+            const saveButton = this;
+            
+            saveButton.addEventListener('click', function(event){
+                event.preventDefault();
+
+                const newName = document.getElementById(`nameInput-${productId}`).value;
+                const newTag = document.getElementById(`tagInput-${productId}`).value;
+                const newCount = document.getElementById(`countInput-${productId}`).value;
+
+                nameSpan.textContent = newName;
+                tagSpan.textContent = newTag;
+                countSpan.textContent = newCount;
+
+                fetch('datafood.php', {
+                    method: 'PATCH',
+                    headers: {'Content-type': 'application/json'},
+                    body: JSON.stringify({id: productId, namefood: newName, tag: newTag, count: newCount})
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    fetchfood();
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+
+                saveButton.textContent = 'Изменить';
+                saveButton.classList.remove('savebutton');
+                saveButton.classList.add('editbutton');
+                
+            })
+        } ,{ once: true });
+    });
+    }
+    fetchfood();
+    document.getElementById('addProductForm').addEventListener('submit',function(event){
+        event.preventDefault();
+        const namefood = document.getElementById('namefood').value;
+        const tag = document.getElementById('tag').value;
+        const count = document.getElementById('count').value;
+
+        fetch('datafood.php',{
+            method:'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({namefood,tag,count})
+        })
+        .then(response=>{
+            if(!response.ok){
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data=>{
+            console.log(data);
+            fetchfood();
+        })
+        .catch(error=>{
+            console.error('There was a problem with the fetch operation:', error);
+        })
+    });
+    function deleteProduct(event){
+        const productid = event.target.getAttribute('data-id');
+        fetch('datafood.php',{
+            method:'DELETE',
+            headers:{'Content-type':'application/json'},
+            body:JSON.stringify({id:productid})
+        })
+        .then(response=>{
+            if(!response.ok){
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data=>{
+            console.log(data);
+            fetchfood();
+        })
+        .catch(error=>{
+            console.error('There was a problem with the fetch operation:', error);
+        })
+    };
+});
+    
+</script>
+</body>
+</html>

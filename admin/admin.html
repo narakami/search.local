@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>админка</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<a href="../index.php" style="margin-top: -5px;">index</a>
+    <a href="globus.html" style="margin-top: -5px; margin-left: 80px;">globus</a>
+        <a href="../jsbdtest.html" style="margin-top: -5px; margin-left: 80px;">BRUH слишком большой код иди js бд сюда</a>
+<body>
+    <div class="addproduct">
+        <form id="addProductForm" enctype="multipart/form-data">
+            <label for="name">Название продукта:</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="tag">Тег:</label>
+            <input type="text" id="tag" name="tag">
+        
+            <label for="price">Цена:</label>
+            <input type="number" id="price" name="price" required>
+        
+            <label for="count">Количество:</label>
+            <input type="number" id="count" name="count" required>
+        
+            <label for="image">Изображение:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            
+            <!-- Здесь будет отображаться предварительный просмотр изображения -->
+            <div id="imagePreviewContainer" style="margin-top: 10px;">
+                <img id="imagePreview" src="" alt="Предпросмотр изображения" style="max-width: 200px; display: none;">
+            </div>
+        
+            <button type="submit">Добавить продукт</button>
+        </form>
+        
+        
+        
+        <div id="result"></div>
+        
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

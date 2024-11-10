@@ -1,0 +1,72 @@
+.rblock {
+    position: absolute;
+    height: 100%;
+    width: 300px;
+    top:0;
+    right:0;
+    display: flex;
+  }
+  .rbtn{
+      margin-left: -20px;
+      background-color: aqua;
+      border: solid 1px ;
+      border-radius: 10px;
+      z-index: 1;
+      height: 20px;
+      padding: 5px;
+      cursor: pointer;
+      user-select: none;
+  }
+  .live{
+      background-color: rgb(168, 248, 98);
+      position: absolute;
+      height: 100%;
+      width: 300px;
+  }
+  .container {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .none{
+      display: none;
+  }
+  p{
+      margin: 0;
+      margin-top: 20px;
+  }
+  li {
+      list-style-type: none;
+      cursor: pointer;
+  }
+  .mleft{
+  margin-left: 86%;
+  }
+  .flex{
+      display: flex;
+  }
+  .secretsearch{
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background-color: white;
+  }
+.okno{
+    background-color: rgb(73, 226, 243);
+    
+} 
+.bloks{
+    width: 100px;
+    height: 50px;
+    background-color: aqua;
+    border-radius: 10px;
+    border: solid 1px;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}     
+.crest{
+    width: 20px;
+    height: 20px;
+}

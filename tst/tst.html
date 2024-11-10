@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка фото и галерея</title>
+</head>
+<body>
+    <a href="../index.php">index</a>
+    <h2>Загрузите фото</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="image">Выберите фото:</label>
+        <input type="file" id="image" name="image" accept="image/*" required><br><br>
+        <button type="submit">Загрузить</button>
+    </form>
+
+    <p id="result"></p>
+    <script src="upload.js"></script>
+</body>
+</html>

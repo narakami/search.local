@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    color: #333;
+    background-color: #f0f8f5; /* Лёгкий светло-зелёный */
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.regformant{
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 10%;
+    background-color: rgba(190, 238, 135, 0.869);
+    padding: 50px;
+    border: 1px solid;
+    border-radius: 15px;
+    span{
+        position: absolute;
+        margin-left: 40px;
+        margin-top: -30px;
+    }
+}
+/* Шапка */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: #7fc97a; /* Легкий зелёный */
+    .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    }
+    input[type="text"] {
+    padding: 8px;
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    }
+    .regbtn{
+        background-color: #ccc;
+        border: 1px solid;
+        cursor: pointer;
+    }
+    
+    .menu a {
+    color: white;
+    margin-left: 15px;
+    font-weight: bold;
+    }
+    .authform{
+        display: none;
+    }
+    .tauth{
+        position: absolute;
+        margin-left: -73px;
+    }
+    .secretsearch {
+        position: absolute; /* Позволяет позиционировать относительно родительского элемента */
+        border: 1px solid #ccc;
+        background-color: white;
+        z-index: 1000; /* Помещает над другими элементами */
+        .visible {
+            display: block; /* Показываем, когда есть результаты */
+        }
+    }
+    
+    
+    
+    #results div {
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    #results div:hover {
+        background-color: #f0f0f0; /* Изменяем фон при наведении */
+    }
+}
+/* Баннер */
+.banner {
+    background-color: #a8d5b5; /* Ещё более светлый зелёный */
+    padding: 20px;
+    text-align: center;
+    color: #333;
+}
+.banner h1 {
+    font-size: 28px;
+}
+
+/* Категории */
+.categories {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.category {
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    background-color: #d9ead3; /* Светло-зелёный для карточек */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+/* Основной стиль для карточки продукта */
+.product-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+}
+
+.product-details {
+    padding: 15px;
+    text-align: center;
+}
+
+.product-name {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.product-tag, .product-count, .product-price {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.product-price span {
+    font-weight: bold;
+    color: #000;
+}
+
+.add-to-cart {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #45a049;
+}
+
+
+/* Популярные товары */
+.popular {
+    padding: 20px;
+}
+.popular h2 {
+    margin-bottom: 15px;
+    color: #4e8045;
+}
+.product-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.product-card {
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    background-color: #ffffff; /* Белый для контраста */
+    border: 1px solid #c0e5c8; /* Лёгкий зелёный бордер */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.product-card h3 {
+    font-size: 18px;
+    color: #4e8045;
+}
+.product-card p {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #333;
+}
+.product-card button {
+    padding: 10px 15px;
+    background-color: #7fc97a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.product-card button:hover {
+    background-color: #6ab068;
+}
+
+/* Футер */
+.footer {
+    background-color: #4e8045;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+.footer a {
+    color: #d9ead3;
+    margin: 0 5px;
+}
+
+/* Технические классы */
+
+.none{
+    display: none;
+}

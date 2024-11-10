@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="globus.css">
+    <title>Продуктовый магазин</title>
+</head>
+<div class="regformant none" id="dauth">
+    <div>
+        <span>регистрация</span>
+        <form action="" method="POST" class="tauth" id="register">
+            <input name="rlogin" id="rlogin" required placeholder="login">
+            <br>
+            <input name="rpassword" id="rpassword" required placeholder="password">
+            <br>
+            <input name="rsecondpassword" id="rsecondpassword" required placeholder="second password">
+            <br>
+            <input type="submit" name="reg" id="reg">
+        </form>
+    </div>
+</div>
+<body>
+    <a href="index.php" style="position: absolute; margin-top: -5px;">возврат</a>
+    <a href="admin.html" style="position: absolute; margin-top: -5px; margin-left: 80px;">админка</a>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="logo">Магазин</div>
+        <div class="" id="tst">
+            <input type="text" id="namefood" name="namefood" required placeholder="Поиск товаров..." autocomplete="off">
+            <div class="none secretsearch" id="secretsearch">
+            <div id="results"></div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="register" id="authin">
+                <a href="#" id="auth">Войти</a>
+                <div><form action="" method="POST" class="authform tauth" id="authform">
+                    <input name="login" id="login" required placeholder="login">
+                    <br>
+                    <input name="password" id="password" required placeholder="password">
+                    <br>
+                    <input type="submit" name="auth" id="auth">
+                    <span class="regbtn" id="regia">регистрация</span>
+                </form>
+                </div>
+            </div>
+            <a href="#">Корзина</a>
+        </div>
+    </header>
+
+    <!-- Баннер -->
+    <section class="banner">
+        <h1>Свежие продукты каждый день!</h1>
+    </section>
+
+    <!-- Категории -->
+    <section class="categories" id="categories">
+        <div class="category" id="fruits-vegetables">Фрукты и Овощи</div>
+        <div class="category" id="meat-fish">Мясо и Рыба</div>
+        <div class="category" id="dairy-products">Молочные продукты</div>
+        <div class="category" id="drinks">Напитки</div>
+        <div class="category" id="canned-foods">Консервы</div>
+    </section>
+
+    <!-- Популярные товары -->
+    <section class="popular">
+        <h2>Популярные товары</h2>
+        <div class="product-list">
+            <div class="product-card">
+                <!-- <img src="fruit.jpg" alt="Фрукты"> -->
+                <h3>Яблоки</h3>
+                <p>150 руб/кг</p>
+                <button>Добавить в корзину</button>
+            </div>
+            <div class="product-card">
+                <!-- <img src="meat.jpg" alt="Мясо"> -->
+                <h3>Говядина</h3>
+                <p>800 руб/кг</p>
+                <button>Добавить в корзину</button>
+            </div>
+            <div class="product-card">
+                <!-- <img src="milk.jpg" alt="Молоко"> -->
+                <h3>Молоко</h3>
+                <p>50 руб/л</p>
+                <button>Добавить в корзину</button>
+            </div>
+            <div class="product-card">
+                <!-- <img src="drink.jpg" alt="Напиток"> -->
+                <h3>Сок апельсиновый</h3>
+                <p>120 руб/л</p>
+                <button>Добавить в корзину</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <p>Контакты | Соцсети | О нас</p>
+        <p>&copy; 2024 Магазин. Все права защищены.</p>
+    </footer>
+</body>
+    <script src="globus.js"></script>
+</html>
