@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 products = data; // Записываем данные в переменную products
                 console.log('Список продуктов загружен:', products); // Логируем загруженные продукты
-                tovar(data)
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -180,38 +179,95 @@ document.addEventListener('DOMContentLoaded', () => {
             
         
     })
-    function tovar(data) {
-    const tvr = document.getElementById('categories');
-    tvr.innerHTML = "";  // Очищаем текущие данные
-
-    // Ограничиваем количество товаров до 6, если их больше
-    const limitedData = data.slice(0, 6);
-
-    // Отображаем товары
-    limitedData.forEach(item => {
-        const li = document.createElement('div');
-        li.innerHTML = `
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="picture/${item.image}" alt="Product Image">
-                </div>
-                <div class="product-details">
-                    <h2 class="product-name">${item.namefood}</h2>
-                    <p class="product-tag">Тег: <span>${item.tag}</span></p>
-                    <p class="product-count">Количество: <span>${item.count}</span></p>
-                    <p class="product-price">Цена: <span>${item.price}</span></p>
-                    <button class="add-to-cart">Добавить в корзину</button>
-                </div>
-            </div>
-        `;
-        tvr.appendChild(li);
-    });
-}
+    function tovar() {
+        // Выполняем запрос к серверу
+        fetch('tags.php') // Заменить на URL вашего API или PHP скрипта
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json(); // Парсим ответ как JSON
+            })
+            .then(data => {
+                console.log('tags:', data); // Логируем полученные данные
+    
+                // Проверка на пустой массив
+                if (Array.isArray(data) && data.length === 0) {
+                    console.log('data пуст');
+                } else {
+                    const tvr = document.getElementById('categories');
+                    tvr.innerHTML = "";  // Очищаем текущие данные на странице
+    
+                    // Отображаем товары
+                    data.forEach(item => {
+                        const li = document.createElement('div');
+                        li.innerHTML = `
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="picture/${item.image}" alt="Product Image">
+                                </div>
+                                <div class="product-details">
+                                    <h2 class="product-name">${item.namefood}</h2>
+                                    <p class="product-tag">Тег: <span>${item.tag}</span></p>
+                                    <p class="product-count">Количество: <span>${item.count}</span></p>
+                                    <p class="product-price">Цена: <span>${item.price}</span></p>
+                                    <button class="add-to-cart" data-id="${item.id}">Добавить в корзину</button>
+                                </div>
+                            </div>
+                        `;
+                        tvr.appendChild(li);  // Добавляем товар на страницу
+                    });
+    
+                    // Добавляем обработчик событий для кнопок
+                    document.querySelectorAll('.add-to-cart').forEach(button => {
+                        const itemId = button.getAttribute('data-id');
+                        button.addEventListener('click', () => {
+                            fetch('cart.php',{
+                            method:'POST',
+                            headers: {
+                                'Content-Type':'application/json'
+                            },
+                            body: JSON.stringify({id:itemId })
+                            })
+                            .then(response=>{
+                                if(!response.ok){
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.json();
+                            })
+                            .then(data=>{
+                                console.log(data.message); // Показываем сообщение
+                                alert(data.message);
+                            })
+                            .catch(error=>{
+                                console.error('There was a problem with the fetch operation:', error);
+                            })
+                        });
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error); // Обрабатываем ошибку
+            });
+    }
+    function session_cart(){
+        fetch('cart_id.php',{
+            })
+            .then(response => response.json())
+            .then(data=>{
+                console.log(`id` ,data.cartid); // Показываем сообщение
+            })
+            .catch(error=>{
+                console.error('Ошибка при получении сессии:', error);
+            })
+    }
+    
     // Установка обработчика события для формы авторизации
     document.getElementById('authform').addEventListener('submit', authf);
 
     // Инициализация загрузки информации о сессии при загрузке страницы
     fetchfood();
     loadSessionInfo();
-    
+    tovar();
+    session_cart()
 });

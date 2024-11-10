@@ -64,11 +64,15 @@ $accountTableQuery = "CREATE TABLE accaunt (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL
 )";
+$photosTableQuery = "CREATE TABLE photos (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(255) NOT NULL
+)";
 
 // Создаем таблицы, если они не существуют
 createTableIfNotExists($conn, $dbname, 'food', $foodTableQuery);
 createTableIfNotExists($conn, $dbname, 'accaunt', $accountTableQuery);
-
+createTableIfNotExists($conn, $dbname, 'photos', $photosTableQuery);
 $autocomplete = "SELECT * FROM food";
 $result = mysqli_query($conn,$autocomplete);
 
